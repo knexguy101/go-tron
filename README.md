@@ -35,7 +35,7 @@ func main() {
 		log.Fatal("Failed to parse private key hex - ", err)
 	}
 
-	cli := client.New("http://127.0.0.1:16667")
+	cli := client.New("http://127.0.0.1:16667", "TRON-API-KEY-GOES-HERE")
 
 	tx, err := cli.Transfer(src, dest.Address(), 1000000 /* in sun */)
 	if err != nil {

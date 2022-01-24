@@ -29,9 +29,10 @@ type Client struct {
 }
 
 // New creates a new client for the provided host.
-func New(host string) *Client {
+func New(host, apiKey string) *Client {
 	return &Client{
 		host:     host,
+		apiKey: apiKey,
 		throttle: 3 * time.Second,
 	}
 }
