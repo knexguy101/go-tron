@@ -555,6 +555,7 @@ func (c *Client) post(endpoint string, request interface{}, response interface{}
 		return err
 	}
 
+	req.Header.Set("TRON-PRO-API-KEY", c.apiKey)
 	req.Header.Set("Content-Type", "application/json")
 
 	resp, err := http.DefaultClient.Do(req)
