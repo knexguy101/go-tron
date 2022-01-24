@@ -7,10 +7,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/go-chain/go-tron"
-	"github.com/go-chain/go-tron/abi"
-	"github.com/go-chain/go-tron/account"
-	"github.com/go-chain/go-tron/address"
+	"github.com/knexguy101/go-tron"
+	"github.com/knexguy101/go-tron/abi"
+	"github.com/knexguy101/go-tron/account"
+	"github.com/knexguy101/go-tron/address"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -23,6 +23,9 @@ type Client struct {
 
 	// Throttle is the amount of time to wait between querying the state of a transaction.
 	throttle time.Duration
+
+	// apiKey is the api key retrieved from trongrid.io
+	apiKey string
 }
 
 // New creates a new client for the provided host.

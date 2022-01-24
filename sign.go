@@ -3,7 +3,7 @@ package tron
 import (
 	"crypto/ecdsa"
 
-	"github.com/go-chain/go-tron/address"
+	"github.com/knexguy101/go-tron/address"
 )
 
 // Signer is an interface for implementations of objects that
