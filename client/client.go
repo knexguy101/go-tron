@@ -367,7 +367,7 @@ func (c *Client) DeployContract(acc account.Account, input DeployContractInput) 
 		return nil, err
 	}
 
-	return c.await(tx.Id)
+	return c.Await(tx.Id)
 }
 
 type CallContractInput struct {
