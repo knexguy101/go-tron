@@ -48,7 +48,7 @@ func main() {
 
 ### Transfer USDT TRC20
 
-```
+```go
 import (
 	"github.com/joho/godotenv"
 	"github.com/knexguy101/go-tron/abi"
