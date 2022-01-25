@@ -81,6 +81,7 @@ if err != nil {
 	return err
 }
 
+// to get data for the Function, just look up the contract on Tronscan
 res, err := tronClient.CallContract(storageAccount, client.CallContractInput{
 	Function: abi.Function{
 		Mutability: "",
