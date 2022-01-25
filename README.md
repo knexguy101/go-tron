@@ -45,3 +45,72 @@ func main() {
 	log.Printf("%#v\n", tx)
 }
 ```
+
+### Transfer USDT TRC20
+
+```
+import (
+	"github.com/joho/godotenv"
+	"github.com/knexguy101/go-tron/abi"
+	"github.com/knexguy101/go-tron/account"
+	"github.com/knexguy101/go-tron/address"
+	"github.com/knexguy101/go-tron/client"
+	"os"	
+)
+
+const (
+	usdtContract = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+)
+
+tronClient = client.New("https://api.trongrid.io", "GRID_API_KEY")
+to := "TX...."
+var amount uint64 = 1
+
+storageAccount, err := account.FromPrivateKeyHex("SENDERS PRIVATE KEY")
+if err != nil {
+	panic(err)
+}
+
+inputAddr, err := address.FromBase58(toAddress)
+if err != nil {
+	return err
+}
+
+contractAddr, err := address.FromBase58(usdtContract)
+if err != nil {
+	return err
+}
+
+res, err := tronClient.CallContract(storageAccount, client.CallContractInput{
+	Function: abi.Function{
+		Mutability: "",
+		Name: "transfer",
+		Inputs: []abi.Value {
+			{
+				Name: "to",
+				Type: abi.TypeAddress,
+			},
+			{
+				Name: "value",
+				Type: abi.TypeUint256,
+			},
+		},
+	},
+	Address: contractAddr,
+	Arguments: []interface{}{
+		inputAddr,
+		amount,
+	},
+	FeeLimit: 1e10,
+})
+if err != nil {
+	return err
+}
+	
+if err := tronClient.BroadcastTransaction(&res); err != nil {
+	return err
+}
+
+txId := res.Id
+tronClient.Await(txId, 10 * time.Second)
+```
