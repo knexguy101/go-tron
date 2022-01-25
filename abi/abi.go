@@ -169,6 +169,7 @@ func (f Function) Decode(b []byte) ([]interface{}, error) {
 			default:
 				result = append(result, true)
 			}
+		case TypeAddress:
 		case TypeBytes32:
 			var slice [32]byte
 			if _, err := r.Read(slice[:]); err != nil {
@@ -212,6 +213,7 @@ const (
 	TypeBool    ValueType = "bool"
 	TypeBytes32 ValueType = "bytes32"
 	TypeUint256 ValueType = "uint256"
+	TypeAddress ValueType = "address" //fixes transfer contract calls for usdt
 )
 
 func Unmarshal(data []byte, fn Function, v interface{}) error {
