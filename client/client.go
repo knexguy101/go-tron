@@ -582,19 +582,20 @@ func (c *Client) post(endpoint string, request interface{}, response interface{}
 	return nil
 }
 
-// await waits for a transaction to complete processing. The number of requests
+// Await waits for a transaction to complete processing. The number of requests
 // that are made per unit of time is controlled by the throttle config, and
 // the timeout will dictate how long this function will await before giving up.
 // TODO(271): Allow this to be public?
-func (c *Client) await(id string) (*TransactionInfo, error) {
+func (c *Client) Await(id string, sleepTime time.Duration) (*TransactionInfo, error) {
 	for {
 		info, err := c.TransactionInfoById(id)
 		if err != nil {
+			time.Sleep(sleepTime)
 			return nil, err
 		}
 
 		if info == nil {
-			time.Sleep(c.throttle)
+			time.Sleep(sleepTime)
 			continue
 		}
 
